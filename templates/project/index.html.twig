@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Projets disponibles | {{ parent() }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            {% for project in projects %}
+                <div class="col s12 m4 l3">
+                    <div class="article-card">
+                        <img src="{{ asset('dist/img/luffy.jpg') }}" class="responsive-img" width="100">
+                        <h2><a href="{{ path('crowdin_project_show', {'project': project.id}) }}">{{ project.title }}</a></h2>
+                        <span class="date">{{ project.publicationDate|date('d/m/Y') }}</span>
+                    </div>
+                </div>
+            {% endfor %}
+            {{ knp_pagination_render(projects) }}
+        </div>
+    </div><br/>
+    {% if is_granted('ROLE_USER') %}
+    <a href="{{ path('crowdin_project_add') }}">
+        <button class="btn btn-primary">Ajouter un projet</button>
+    </a>
+    {% endif %}
+{% endblock %}

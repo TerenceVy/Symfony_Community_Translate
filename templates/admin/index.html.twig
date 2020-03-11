@@ -1,0 +1,84 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Admin. | {{ parent() }}{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+{% endblock %}
+{% block content %}
+    <div class="admin-page">
+        <div class="container">
+            <div class="row">
+                <div class="col s12">
+                    <a href="{{ path('crowdin_project_add') }}" class="btn btn blue darken-4" style="float: right">Ajouter</a>
+                    <h5>Projects</h5>
+                    <table>
+                        <tr>
+                            <th>#</th>
+                            <th>Titre</th>
+                            <th>Publier</th>
+                            <th>Date de publication</th>
+                            <th>Date de modification</th>
+                            <th>Actions</th>
+                        </tr>
+                        {% set i = 1 %}
+                        {% for project in projects %}
+                            <tr>
+                                <td>{{ i }}</td>
+                                <td><a href="{{ path('crowdin_project_show', {'project': project.id}) }}" target="_blank">{{ project.title }}</a></td>
+                                <td>
+                                    <span class="badge {{ project.isPublished ? 'blue' : 'red' }}">
+                                        {{ project.isPublished ? 'oui' : 'non' }}
+                                    </span>
+                                </td>
+                                <td>{{ project.isPublished ? project.publicationDate|date('d/m/Y') : '-' }}</td>
+                                <td>{{ project.lastUpdateDate|date('d/m/Y') }}</td>
+                                <td>
+                                    <a href="{{ path('crowdin_project_edit', {'project': project.id}) }}"><i class="material-icons blue-text">Modifier</i></a>
+                                    <a href="{{ path('crowdin_project_remove', {'id': project.id}) }}"><i class="material-icons red-text">Supprimer</i></a>
+                                </td>
+                            </tr>
+                            {% set i = i+1 %}
+                        {% endfor %}
+                        {{ knp_pagination_render(projects) }}
+                    </table>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col s12 m-t-30">
+                    <h5>Utilisateurs</h5>
+                    <table>
+                        <tr>
+                            <th>#</th>
+                            <th>Adresse email</th>
+                            <th>Username</th>
+                            <th>Roles</th>
+                            <th>Actions</th>
+                        </tr>
+                        {% set i = 1 %}
+                        {% for user in users %}
+                            <tr>
+                                <td>{{ i }}</td>
+                                <td>{{ user.email }}</td>
+                                <td>{{ user.username }}</td>
+                                <td>
+                                    <span class="badge blue">
+                                        admin.
+                                    </span>
+                                </td>
+                                <td>
+                                    <a href=""><i class="material-icons red-text">Delete</i></a>
+                                </td>
+                            </tr>
+                            {% set i = i+1 %}
+                        {% endfor %}
+                        {{ knp_pagination_render(users) }}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% block scripts %}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>{% endblock %}
+{% endblock %}

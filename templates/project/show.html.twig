@@ -1,0 +1,46 @@
+{% extends "base.html.twig" %}
+{% block title %}{{ project.title }}{% endblock %}
+
+{% block content %}
+    <article class="container">
+        <div class="row" style="text-align: center">
+            <div class="col s12 m12 l8 offset-l2">
+                <h2>{{ project.title }}</h2>
+                <span>{{ project.publicationDate|date('d/m/Y') }}</span>
+                <p>{#uploads/' ~ project.csv#}
+                    <img src="{{ asset('dist/img/luffy.jpg') }}" class="responsive-img" width="300">
+                </p>
+                <p class="languages">Langues du csv : <b>{% for language in project.languages %} {{ language.label }}{{ loop.last ? '' : ',' }} {% endfor %}</b></p>
+            </div>
+        </div>
+        <div class="row" style="text-align: center">
+            <div class="col s12 m12 l8 offset-l2">
+                <p>
+                    Contenu du Csv : <b>{{ project.content }}</b>
+                </p>
+            </div>
+        </div>
+    </article>
+    {% if (project.translation == null )%}
+    <a href="{{ path('crowdin_project_translate', {'project': project.id}) }}">
+        <button class="btn btn-primary">Proposer une traduction</button>
+    </a>
+    {% else %}
+        <div class="row" style="text-align: center">
+            <div class="col s12 m12 l8 offset-l2">
+                <p>
+                    Voici la traduction: <b>{{ project.translation }}</b>
+                </p>
+            </div>
+        </div>
+    {% endif %}
+
+    {% if project_userid == user %}
+        <center>
+            <a href="{{ path('crowdin_project_edit', {'project': project.id}) }}">
+                <button class="btn btn-warning">Modifier un projet</button>
+            </a>
+        </center>
+    {% endif %}
+{% endblock %}
+

@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+    <div class="register-box" style="margin: auto; text-align: center">
+        <div class="register-logo">
+            <a href="{{ path('crowdin_project_index')}}"><b>Modification</b></a>
+        </div>
+        {{ form_start(registrationForm, {'attr': {'class': 'row'}}) }}
+        <div class="card">
+            <div class="card-body register-card-body">
+                <p class="login-box-msg">Modification d'un membre</p>
+                <div class="input-group mb-3">
+                    {{ form_label(registrationForm.username) }}
+                    {{ form_widget(registrationForm.username) }}
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-user"></span>
+                        </div>
+                    </div>
+                    <span class="text-danger">{{ form_errors(registrationForm.username) }}</span>
+                </div>
+                <div class="input-group mb-3">
+                    {{ form_label(registrationForm.email) }}
+                    {{ form_widget(registrationForm.email) }}
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-envelope"></span>
+                        </div>
+                    </div>
+                    <span class="text-danger">{{ form_errors(registrationForm.email) }}</span>
+                </div>
+                <div class="input-group mb-3">
+                    {{ form_label(registrationForm.plainPassword) }}
+                    {{ form_widget(registrationForm.plainPassword) }}
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-lock"></span>
+                        </div>
+                    </div>
+                    <span>{{ form_errors(registrationForm.plainPassword) }}</span>
+                </div>
+
+                <div class="input-group mb-3">
+                    {{ form_label(registrationForm.languages) }}
+                    {{ form_widget(registrationForm.languages) }}
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-lock"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <!-- /.col -->
+                    <div class="col-4">
+                        <input type="submit" class="btn btn-primary btn-block" value="Modifier"/>
+                    </div>
+                    <!-- /.col -->
+                </div>
+            </div>
+            <!-- /.form-box -->
+        </div><!-- /.card -->
+        {{ form_end(registrationForm) }}
+    </div>
+    <!-- /.register-box -->
+
+{% endblock %}

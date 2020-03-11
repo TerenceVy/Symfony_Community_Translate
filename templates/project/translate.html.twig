@@ -1,0 +1,35 @@
+{% extends "base.html.twig" %}
+
+{% block title %} Ajouter un projet{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <h4>Proposer une traduction</h4>
+            </div>
+        </div>
+    </div>
+    {{ form_start(form) }}
+    <article class="container">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <h2>
+                    <h2>{{ project.title }}</h2>
+                    Contenu du Csv :
+                </h2>
+                <span><b>{{ project.content }}</b></span>
+            </div>
+        </div>
+    </article>
+    <div class="row">
+        <div class="col s12 m12 l12 offset-lg-6">
+            {{ form_label(form.translation,'Votre traduction') }}
+            {{ form_widget(form.translation,{ 'attr': {'cols': '50', 'rows':'15'}}) }}
+            <input type="submit" name="" value="Enregistrer" class="btn btn-primary">
+        </div>
+    </div>
+{{ form_end(form) }}
+{% endblock %}
+{% block javascripts %}
+{% endblock %}

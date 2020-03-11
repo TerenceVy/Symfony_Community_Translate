@@ -1,0 +1,29 @@
+{{ form_start(form, {'attr': {'class': 'row'}}) }}
+<div class="input-field col s12 m12 l12">
+    {{ form_widget(form.csv) }}
+</div>
+
+<div class="input-field col s12 m6 l6">
+    {{ form_widget(form.title, {'attr': {'placeholder': 'Titre du csv'}}) }}
+    <span class="text-danger">{{ form_errors(form.title) }}</span>
+</div>
+
+<div class="input-field col s12 m6 l6">
+    {{ form_widget(form.languages) }}
+    {{ form_label(form.languages, 'Choisissez la langue du csv') }}
+    <span class="text-danger">{{ form_errors(form.languages) }}</span>
+</div>
+
+<div class="input-field col s12 m12 l12">
+    <p>
+        <label>
+            {{ form_widget(form.isPublished, {'attr': {'class': 'filled-in'}}) }}
+            <span>Publier</span>
+        </label>
+    </p>
+</div>
+
+<div class="input-field col s12 m12 l12">
+    <input type="submit" name="" value="Enregistrer" class="btn btn-primary">
+</div>
+{{ form_end(form) }}
